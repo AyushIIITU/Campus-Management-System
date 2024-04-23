@@ -1,0 +1,32 @@
+.StudentPortalHeader{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding-left:9vh ;
+    background: black;
+    color: #ffffff;
+    
+}
+/* StudentPortalHeader.css */
+
+/* Header styles */
+
+  
+  /* Logo styles */
+  .StudentPortalHeader img {
+    /* margin-left: 70px; */
+    width: 50px; /* Adjust the width of the logo */
+    /* margin-right: 1rem; Add space between logo and text */
+  }
+  
+  /* Text styles */
+  .StudentPortalHeader div {
+    font-size: 1.2rem; /* Adjust font size */
+  }
+  .HeaderIIT{
+    display: flex;
+    align-items: center;
+    height: max-content;
+    min-width: 37vh;
+    margin-left: 70px;
+  }

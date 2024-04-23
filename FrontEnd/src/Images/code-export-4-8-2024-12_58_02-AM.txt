@@ -1,0 +1,81 @@
+Clubs [icon:image] {
+    id string pk
+    decriptionOfClub String
+    clubLogo Image
+    FacultyIncharge Object (Ref:Faculty)
+    Pricident string
+    event objectId
+}
+Events [icon:aws-iot-events]{
+  id string pk
+  eventName string
+  Date Date
+  imagesOfEvent [Image : String]
+  DescriptionOfEvent String
+}
+Faculty [icon:teams]{
+  id string pk
+    Name string
+    Profileimage image :string
+    department string
+    specialization string
+    mobile_no number
+    email string
+    role string
+    resume string (LinkdIN)
+    collegeResume objectId (Ref:CollegeResume)
+}
+CollegeResume [icon:azure-file]{
+  id string pk
+  Education array[year :String,Description :String]
+Award&Honours array[Desc String]
+Research array[resc String]
+
+  
+
+}
+Courses [icon: book-open] {
+    id string pk
+    courseName string
+    description string
+    semWiseSubject array [[sub,PDF]]
+    
+}
+Gallery [icon:power-pages]{
+  id string pk
+  TypeOfEvent array[[type:string,events:objectId]]
+}
+TPO [icon: industry] {
+  id string pk
+  name string
+  email string
+  mobile_no string
+  image image string
+  message string
+}
+
+News [icon: newspaper] {
+    id string pk
+    title string
+    image string
+    Main_Heading string
+    Date Date
+    Type  ??
+}
+
+Tender [icon: building] {
+  id string pk
+  service string
+  TenderDoc PDF :string
+  startDate Date
+  endDate Date
+  annexure PDF :string
+
+}
+
+Clubs.event > Events.id
+Clubs.FacultyIncharge - Faculty.id
+Faculty.collegeResume < CollegeResume.id
+Gallery.TypeOfEvent < Events.id
+
+
