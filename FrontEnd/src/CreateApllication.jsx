@@ -158,7 +158,7 @@ function CreateApllication() {
               placeholder="recipient's e-mail"
             />
           </form> */}
-          <button onClick={handleCheck}>jkkjjkjbk</button>
+
         </div>
       </div>
     </div>

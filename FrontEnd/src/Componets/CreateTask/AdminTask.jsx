@@ -1,10 +1,10 @@
 import axios from "axios";
 import React from "react";
 import toast from "react-hot-toast";
-
+import style from "./ShowTask.module.css"
 function AdminTask() {
   const [taskToResolved, setTaskToResolved] = React.useState([]);
-  const refMessage=React.useRef();
+  const refMessage = React.useRef([]);
 
   const fetchData = async () => {
     try {
@@ -22,21 +22,28 @@ function AdminTask() {
   React.useEffect(() => {
     fetchData();
   }, []);
-  const handleResolveTask = async (ComplainId) => {
-    try {
-      await axios.put(`http://localhost:3000/task/taskIsSolved/${ComplainId}`, {
-     
-        status: `${localStorage.getItem("AdminName")} : ${refMessage.current.value}`,
-      });
-      toast.success("Task Message is Sent Successfully");
-      fetchData();
-    } catch (err) {
-      toast.error("Error in Getting  Data from  Server");
+  const handleResolveTask = async (ComplainId, Index) => {
+    const message = refMessage.current[Index].value; // Get the value from the correct ref
+    if (message === "") {
+      return toast.error("Please Enter Message");
+    } else {
+      try {
+        await axios.put(
+          `http://localhost:3000/task/taskIsSolved/${ComplainId}`,
+          {
+            status: `${localStorage.getItem("AdminName")} : ${message}`,
+          }
+        );
+        toast.success("Task Message is Sent Successfully");
+        fetchData();
+      } catch (err) {
+        toast.error("Error in Getting Data from Server");
+      }
     }
   };
   return (
-    <div style={{ display: "flex", "flexWrap": "wrap" }}>
-      {taskToResolved.map((Task) => (
+    <div style={{ display: "flex", flexWrap: "wrap" }}>
+      {taskToResolved.map((Task, index) => (
         <div
           key={Task._id}
           className="card CompalinPost"
@@ -44,9 +51,9 @@ function AdminTask() {
         >
           <div
             style={{
-              "display": " flex",
-              "alignItems": "center",
-              "justifyContent": "space-around",
+              display: " flex",
+              alignItems: "center",
+              justifyContent: "space-around",
             }}
           >
             <div className="card__span" style={{ position: "inherit" }}>
@@ -69,32 +76,71 @@ function AdminTask() {
               {Task.description}
             </p>
             <div className="AlingPostFooter">
-              <div style={{ display: "flex" }}>
-              
-
-              </div>
-              <span className={`badge text-bg-${((Task.deadline / 1000 / 60 / 60 / 24) - ((Date.now() - new Date(Task.createdAt).getTime()) / (1000 * 60 * 60 * 24))) > 0 ? 'success' : 'danger'} AlignPostFooterDate`}>
-  {((Task.deadline / 1000 / 60 / 60 / 24) - ((Date.now() - new Date(Task.createdAt).getTime()) / (1000 * 60 * 60 * 24))).toFixed(1)} Days
-</span>
-
-
-
-
+              <div style={{ display: "flex" }}></div>
+              <span
+                className={`badge text-bg-${
+                  Task.deadline / 1000 / 60 / 60 / 24 -
+                    (Date.now() - new Date(Task.createdAt).getTime()) /
+                      (1000 * 60 * 60 * 24) >
+                  0
+                    ? "success"
+                    : "danger"
+                } AlignPostFooterDate`}
+              >
+                {(
+                  Task.deadline / 1000 / 60 / 60 / 24 -
+                  (Date.now() - new Date(Task.createdAt).getTime()) /
+                    (1000 * 60 * 60 * 24)
+                ).toFixed(1)}{" "}
+                Days
+              </span>
             </div>
             <div>
               <strong>Status</strong>: {Task.status}
             </div>
-                {/* <div>
+            {/* <div>
                 <strong>Handler</strong>: {Task.complainHandler}
                 </div> */}
-                <input  style={{width: '-webkit-fill-available'}} type='text'  ref={refMessage} placeholder="Enter Message"/>
+            <div className={style.messageBox}>
+              <input
+                ref={(element) => (refMessage.current[index] = element)}
+                required=""
+                placeholder="Message..."
+                type="text"
+                id={style.messageInput}
+              />
+              <button
+                onClick={() => handleResolveTask(Task._id, index)}
+                id={style.sendButton}
+                type="submit"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 664 663"
+                >
+                  <path
+                    fill="none"
+                    d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+                  ></path>
+                  <path
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="33.67"
+                    stroke="#6c6c6c"
+                    d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            {/* <input  style={{width: '-webkit-fill-available'}} type='text'  ref={refMessage} placeholder="Enter Message"/>
             <button
               onClick={() => handleResolveTask(Task._id)}
               type="button"
               className="btn btn-info"
             >
               Sent
-            </button>
+            </button> */}
           </div>
         </div>
       ))}

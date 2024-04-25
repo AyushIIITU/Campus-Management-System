@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import "./CreatePost.css";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import ComplainPost from "./Svg/complaint.svg";
 function CreatePost() {
   const [postType, setPostType] = useState("Private"); // State to track the selected post type
 
@@ -13,23 +13,23 @@ function CreatePost() {
   const refPhoneNumber = useRef();
   const refTitle = useRef();
   const refDesc = useRef();
-  const handleCreateComplainPost = async(e) => {
+  const handleCreateComplainPost = async (e) => {
     e.preventDefault();
-    const PhoneNumber=refPhoneNumber.current.value;
-    const  Title=refTitle.current.value;
-    const  Description=refDesc.current.value;
-    console.log(typeof(parseInt(PhoneNumber)),Title,Description);
+    const PhoneNumber = refPhoneNumber.current.value;
+    const Title = refTitle.current.value;
+    const Description = refDesc.current.value;
+    console.log(typeof parseInt(PhoneNumber), Title, Description);
     try {
-      const response=await axios.post('http://localhost:3000/complain',{
-        studentId:localStorage.getItem("StudentId"),
+      const response = await axios.post("http://localhost:3000/complain", {
+        studentId: localStorage.getItem("StudentId"),
         typeOfComplain: postType,
         name: localStorage.getItem("StudentName"),
         phoneNo: parseInt(PhoneNumber),
         title: Title,
-        descriptionOfComplain: Description
-      })
+        descriptionOfComplain: Description,
+      });
       console.log(response);
-      if(response.status==200){
+      if (response.status == 200) {
         // toast.success("Successfully created a complain");
         toast.success("Your complaint has been registered successfully!");
       }
@@ -39,7 +39,7 @@ function CreatePost() {
   };
 
   return (
-    <center style={{ marginTop: "15%" }}>
+    <div style={{display:'flex',justifyContent:'center',marginTop:'15vh'}} >
       <div className="form-container">
         <form onSubmit={handleCreateComplainPost} className="form">
           <div className="mydict">
@@ -72,7 +72,7 @@ function CreatePost() {
             <label htmlFor="Phone">PhoneNumber</label>
             <input
               ref={refPhoneNumber}
-              required=""
+              required="required"
               name="Phone"
               id="Phone"
               type="number"
@@ -82,7 +82,7 @@ function CreatePost() {
             <label htmlFor="Title">Title</label>
             <input
               ref={refTitle}
-              required=""
+              required="required"
               name="Title"
               id="Title"
               type="text"
@@ -91,8 +91,8 @@ function CreatePost() {
           <div className="form-group">
             <label htmlFor="textarea">Description</label>
             <textarea
-            ref={refDesc}
-              required=""
+              ref={refDesc}
+              required="required"
               cols="50"
               rows="10"
               id="textarea"
@@ -107,15 +107,26 @@ function CreatePost() {
           {/* <button type="submit" className="form-submit-btn">Submit</button> */}
         </form>
       </div>
-    </center>
+    </div>
   );
 }
 
 export default CreatePost;
 /*  <div class="container">
         <div class="left">
-            <form class="form">
+            <form onSubmit={handleCreateComplainPost} className="form">
                 <div class="input-block">
+                <label>
+                <input
+                  type="radio"
+                  name="radio"
+                  value="Private"
+                  checked={postType === "Private"}
+                  onChange={handleRadioChange}
+               
+                />
+                <span>Private</span>
+              </label>
                     <input class="input" type="text" id="name" required="">
                     <label for="name">Name</label>
                 </div>
@@ -178,3 +189,4 @@ export default CreatePost;
 
         </div>
     </div>*/
+/*  */

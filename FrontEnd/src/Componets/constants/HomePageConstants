@@ -1,0 +1,19 @@
+export const img=
+   [
+     {
+     head: "WELCOME TO IIIT UNA",
+     src:    "https://iiitu.ac.in/wp-content/uploads/2023/09/33-x16-scaled.jpg",
+
+ },
+     {
+     head: "Be an IIITian!",
+     src:   "../../Images/IIITU-2.jpg"
+,
+
+ }
+    // "https://iiitu.ac.in/wp-content/uploads/2023/09/33-x16-scaled.jpg",
+    // "https://iiitu.ac.in/wp-content/uploads/2023/09/33-x16-scaled.jpg",
+    // "https://iiitu.ac.in/wp-content/uploads/2023/09/33-x16-scaled.jpg",
+    // "https://iiitu.ac.in/wp-content/uploads/2023/09/33-x16-scaled.jpg",
+    // "/iiitu1.svg"
+]

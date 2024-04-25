@@ -4,6 +4,7 @@ import "./Bus.scss";
 import SeatAllocatedDisplay from "./SeatAllocatedDisplay";
 import toast from "react-hot-toast";
 import axios from "axios";
+import BusStatica from "./BusStatica";
 
 const Bus = () => {
     const [seatReserved, setSeatReserved] = useState([]);
@@ -96,6 +97,7 @@ const Bus = () => {
           <SeatAllocatedDisplay userDetails={userDetails} />
         </div>
       </div>
+      <BusStatica/>
     </>
   );
 };

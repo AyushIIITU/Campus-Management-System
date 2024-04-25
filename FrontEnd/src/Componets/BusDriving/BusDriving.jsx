@@ -1,9 +1,123 @@
-import React from 'react'
+import { useEffect, useState } from "react";
+import BusBooker from "../BusBooking/busBookingForm";
+import "../BusBooking/Bus.scss";
+import SeatAllocatedDisplay from "../BusBooking/SeatAllocatedDisplay";
+import toast from "react-hot-toast";
+import axios from "axios";
+import BusStatica from "../BusBooking/BusStatica";
+import ClearAllButton from "../BusBooking/ClearAllButton";
 
-function BusDriving() {
-  return (
-    <div>BusDriving</div>
-  )
+const BusDriving = () => {
+    const [seatReserved, setSeatReserved] = useState([]);
+    const [userDetails, setUserDetails] = useState([]);
+    const seats = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+    
+    useEffect(() => {
+      fetchData();
+    }, []);
+    
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/bus");
+        setUserDetails(response.data);
+        const reservedSeats = response.data.map(seatUser => seatUser.seatNo);
+        setSeatReserved(reservedSeats);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+ const IsAllocated = async (Phone, SeatNumber) => {
+  if (!seatReserved.includes(parseInt(SeatNumber))) {
+    if (parseInt(SeatNumber) < 1 || parseInt(SeatNumber) > 16) {
+      toast.error("Invalid Seat Number");
+    } else {
+      try {
+        const response = await axios.post("http://localhost:3000/bus", {
+          name: localStorage.getItem('StudentName') || localStorage.getItem('AdminName'),
+          phoneNo: Phone,
+          seatNo: SeatNumber,
+          userId: localStorage.getItem('StudentId') || localStorage.getItem('AdminId')
+        });
+        setUserDetails([...userDetails, response.data]);
+        setSeatReserved([...seatReserved, parseInt(SeatNumber)]);
+        toast.success("Seat allocated successfully");
+      } catch (error) {
+        console.error("Error allocating seat:", error);
+        toast.error("Failed to allocate seat");
+      }
+    }
+  } else {
+    toast.error("The selected seat is already allocated");
+  }
+};
+const HandleOnDeleteAll=async()=>{
+  if(seatReserved.length==0){
+    return ;
+  }
+  else{
+    try {
+      // "acknowledged": true,
+      const  res =await axios.delete(`http://localhost:3000/bus`);
+      if(res.acknowledged){
+        toast.success("All User Is Deleted Successfully");
+      }
+      setUserDetails([]);
+      setSeatReserved([]);
+      
+    } catch (err) {
+      console.error("Error in  deleting all seats : ", err);
+    }
+  }
 }
+  return (
+    <>
+    <ClearAllButton HandleOnDeleteAll={HandleOnDeleteAll}/>
+      <div style={{
+        display: "flex",
+        flexDirection: "row-reverse",
+        flexWrap: "wrap",
+        justifyContent: "space-around",
+        alignItems: "center"
+      }}>
+       
+        <div className="busContainer">
+          <label><div className="reveal-text">Choose Seat</div></label>
+          <div className="text-left mt-2" style={{display:'flex',columnGap:'65px'}}>
+            <button className="btn btn-primary btn-xs mb-2">Available</button>
+            {/* <button className="btn btn-success btn-xs mb-2">Choosen</button> */}
+            <button className="btn btn-danger btn-xs mb-2">Booked</button>
+          </div>
 
-export default BusDriving
+          <div className="bus seat2-2 border-0 p-0">
+            <div className="seat-row">
+              <ol className="seats" style={{ flexWrap: "wrap", width: "max-content", maxWidth: "30vh" }}>
+                {seats.map((seatNumber) => (
+                  <li key={seatNumber} className="seat">
+                    <input
+                      role="input-passenger-seat"
+                      name="seat"
+                      id={`seat-radio-1-${seatNumber}`}
+                      value={seatNumber}
+                      required
+                      type="radio"
+                      disabled={seatReserved.includes(seatNumber)}
+                    />
+                    <label htmlFor={`seat-radio-1-${seatNumber}`}>
+                      {seatNumber}
+                    </label>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+
+          <SeatAllocatedDisplay userDetails={userDetails} />
+        </div>
+      </div>
+      <BusStatica/>
+    </>
+  );
+};
+
+export default BusDriving;

@@ -2,6 +2,8 @@ import React from "react";
 import style from "./CreateTask.module.css";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Clock from "./Clock";
+import { FcClock } from "react-icons/fc";
 function CreateTask() {
  
   const [selectedHandler, setSelectedHandler] =
@@ -56,8 +58,10 @@ function CreateTask() {
         marginTop: "20vh",
       }}
     >
+      
       <form className={style.form} onSubmit={handleTaskForm}>
-        <div className={style.title}>Task Creation</div>
+      
+        <div className={style.title}>Task Creation<FcClock /></div>
         <select
           className="custom-select"
           id="inputGroupSelect02"
@@ -70,9 +74,9 @@ function CreateTask() {
             </option>
           ))}
         </select>
-        <input type="text" ref={refTitle} placeholder="Title of Tasks" />
-        <textarea placeholder="Your message" ref={refDesc} />
-        <input type="number" placeholder="DeadLine in Days" ref={refDeadLine} />
+        <input type="text" ref={refTitle} placeholder="Title of Tasks" required="required" />
+        <textarea placeholder="Your message" ref={refDesc} required="required"/>
+        <input type="number" placeholder="DeadLine in Days" ref={refDeadLine} required="required" />
         <button type="submit">Submit</button>
       </form>
     </div>

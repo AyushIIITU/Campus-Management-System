@@ -3,7 +3,7 @@ import IIITUNA from "../../Images/IIITULogo.png";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import backGround from "../../Svg/IIIT-UNA.svg";
 function StudentLogin() {
   const refEmail = useRef();
   const refPassword = useRef();
@@ -35,6 +35,7 @@ function StudentLogin() {
   };
 
   return (
+    <div className="svg-background" style={{backgroundImage: `url(${backGround})`}}>
     <div className="student-login">
       <form onSubmit={handleLoginAuth} className="form_main">
         <img
@@ -90,6 +91,7 @@ function StudentLogin() {
           Forgot your password?
         </a>
       </form>
+    </div>
     </div>
   );
 }

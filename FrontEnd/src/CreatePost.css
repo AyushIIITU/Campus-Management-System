@@ -3,7 +3,16 @@
   border-color: #2260ff;
   /* box-shadow: 0 0 0 4px #b5c9fc; */
  
-
+  .Complain-Post-BackGroung{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    object-fit: contain;
+    overflow: hidden; 
+    display: flex;
+    width: 100%;
+    height: 100vh;
+  }
 .mydict div {
   display: flex;
   flex-wrap: wrap;
@@ -53,9 +62,7 @@ label:last-child span {
   
 .form-container {
     width: 400px;
-    background: linear-gradient(#ffffff, #ebcbff) padding-box,
-                linear-gradient(145deg, transparent 35%,#e81cff, #40c9ff) border-box;
-    border: 2px solid transparent;
+    background: linear-gradient(180deg, #DCF9E0 0%, #FFFFFF 30.21%) padding-box, linear-gradient(85deg, transparent 35%, #00ff8e, #40c9ff) border-box;border: 2px solid transparent;
     padding: 32px 24px;
     font-size: 14px;
     font-family: inherit;
@@ -135,15 +142,85 @@ label:last-child span {
   
   .form-container .form-group input:focus {
     outline: none;
-    border-color: #e81cff;
+    border-color: #ff951c;
   }
   
   .form-container .form-group textarea:focus {
     outline: none;
-    border-color: #e81cff;
+    border-color: #ff951c;
   }
   
-.button {
+  .button {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    padding-block: 0.5rem;
+    padding-inline: 1.25rem;
+    background-color: rgb(0 107 179);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffff;
+    gap: 10px;
+    font-weight: bold;
+    border: 3px solid #ffffff4d;
+    outline: none;
+    overflow: hidden;
+    font-size: 15px;
+  }
+  
+  .icon {
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .button:hover {
+    transform: scale(1.05);
+    border-color: #fff9;
+  }
+  
+  .button:hover .icon {
+    transform: translate(4px);
+  }
+  
+  .button:hover::before {
+    animation: shine 1.5s ease-out infinite;
+  }
+  
+  .button::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100%;
+    background-image: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0) 70%
+    );
+    top: 0;
+    left: -100px;
+    opacity: 0.6;
+  }
+  
+  @keyframes shine {
+    0% {
+      left: -100px;
+    }
+  
+    60% {
+      left: 100%;
+    }
+  
+    to {
+      left: 100%;
+    }
+  }
+  
+
+/* .button {
   --bezier: cubic-bezier(0.22, 0.61, 0.36, 1);
   --edge-light: hsla(0, 0%, 50%, 0.8);
   --text-light: rgba(255, 255, 255, 0.4);
@@ -198,7 +275,7 @@ label:last-child span {
   color: hsla(0, 0%, 100%, 1);
   letter-spacing: 0.1em;
   transform: scale(1);
-}
+} */
 
   
 

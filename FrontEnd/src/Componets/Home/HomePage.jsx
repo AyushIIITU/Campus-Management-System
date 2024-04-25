@@ -1,8 +1,9 @@
 import React from 'react'
-import HomePageCrousal from  './HomePageCrousal.jsx';
+import HomePageCarousel from './HomePageCrousal.jsx';
+import { img } from '../constants/HomePageConstants'
 function HomePage() {
   return (
-    <HomePageCrousal/>
+    <HomePageCarousel/>
   )
 }
 

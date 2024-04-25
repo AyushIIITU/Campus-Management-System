@@ -51,6 +51,7 @@ function UserInput({ addUserToQueue }) {
             ref={refTime}
             className="custom-search-input"
             placeholder="Enter time in minutes"
+            required="required"
           />
           <input
             type="number"
@@ -58,6 +59,7 @@ function UserInput({ addUserToQueue }) {
             ref={refPhone}
             className="custom-search-input"
             placeholder="Enter Phone No"
+            required="required"
           />
           <button type="submit" className="custom-search-botton">
             Join Queue

@@ -28,6 +28,8 @@ import RatingPage from "./Componets/Rating/RatingPage.jsx";
 import Home from "./Componets/Home/Home.jsx";
 import HomePage from "./Componets/Home/HomePage.jsx";
 import BusDriving from "./Componets/BusDriving/BusDriving.jsx";
+import BusLogin from "./Componets/BusDriving/BusLogin.jsx";
+import BusControl from "./Componets/BusDriving/BusConttol.jsx";
 // import StarRating from "./Componets/Rating/Rating.jsx";
 const router = createBrowserRouter([
   {
@@ -41,7 +43,7 @@ const router = createBrowserRouter([
     ]
   },{
     path:"/BusDriver",
-    element:<BusDriving/>
+    element:<BusControl/>
   },
   {
     path:"/Rating",
@@ -54,6 +56,10 @@ const router = createBrowserRouter([
   {
     path:"/GardLogin",
     element: <Gard/>
+  },
+  {
+    path:"/DriverLogin",
+    element:<BusLogin/>
   },
   {
     path:'/WashingMachineControling',

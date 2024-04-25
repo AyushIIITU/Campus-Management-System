@@ -103,3 +103,35 @@ $brand-danger: #f73737;
 		}
 	}
 }
+
+
+.reveal-text {
+	margin: 0;
+	padding: 0px;
+	color: #222333;
+	font-family: 'Arial', sans-serif;
+	font-size: 30px;
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+	animation: revealAnimation 2s forwards;
+}
+@keyframes revealAnimationContainer {
+	50% {
+		transform: scale(1);
+   }
+	100% {
+		transform: scale(3);
+   }
+}
+@keyframes revealAnimation {
+	0% {
+		transform: translateY(100%) ;
+   }
+	50% {
+		transform: translateY(0) ;
+   }
+	100% {
+		transform: translateY(0);
+   }
+}
