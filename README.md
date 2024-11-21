@@ -52,5 +52,7 @@ The system consists of three main panels: the Student Panel, the Admin Panel, an
 
 [Documentation](https://docs.google.com/document/d/1lTvBGUxEPrNkYP535egUwD7o-JKFKcRs/edit?usp=sharing&ouid=111296748089125574377&rtpof=true&sd=true)
 
+## Demo Video 
+
 [![YouTube](http://i.ytimg.com/vi/ZEZ7gy2EYAk/hqdefault.jpg)](https://www.youtube.com/watch?v=ZEZ7gy2EYAk)
 
